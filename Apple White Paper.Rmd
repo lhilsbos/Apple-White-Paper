@@ -11,10 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 We read in CSV price data from the USDA Agricultural Marketing Serive for the terminal market price of apples. The data spans 1998 to present - all years available in the AMS's tool. We will review the complete data before seperating the data into several data frames for analysis
 ```{r}
-read.csv(1998_2022_100_Tray_Apples.csv)
-read.
-#data_1<-read.csv(file.choose())
-data_1
+data_1 <- read.csv('1998_2022_100_Tray_Apples.csv')
 head(data_1)
 summary(data_1)
 ```
@@ -28,7 +25,7 @@ library("lubridate")
 help("lubridate")
 
 data_1$Date<-as.Date(data_1$Date, format = "%Y/%m/%d")
-#data_1$Date<-julian(data_1$Date)
+data_1$Date<-julian(data_1$Date)
 
 head(data_1)
 summary(data_1)
