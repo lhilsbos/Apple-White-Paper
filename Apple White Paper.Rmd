@@ -20,22 +20,44 @@ summary(data_1)
 #Converting Date values to numeric
 
 #install.packages("tidyverse")
+library("dplyr")
 library("tidyverse")
 library("lubridate")
 help("lubridate")
 
-data_1$Date<-as.Date(data_1$Date, format = "%Y/%m/%d")
-data_1$Date<-julian(data_1$Date)
+#these don't work
+#data_1$Date<-as.Date(data_1$Date, format = "%Y/%m/%d")
+#data_1$Date<-julian(data_1$Date)
 
 head(data_1)
 summary(data_1)
 class(data_1$Date)
 ```
+```{r}
+#Edit column names
+colnames(data_1) <- c("Commodity", "Date", "City", "State", "Variety", "empty_1", "Pack", "Count", "empty_2", "empty_3", "Grade", "Organic", "High Price", "Low Price", "AveragePrice")
+head(data_1)
+```
 
+```{r}
+#Mutate Dates from character to date type
+library(lubridate)
+data_1 <- subset(data_1, select =  -c(Commodity))
+head(data_1)
+class(data_1)
+```
+
+
+```{r}
+data_1 <- mutate(data_1, Date_1 = mdy(Date))
+summary(data_1)
+head(data_1)
+```
 
 Next we will look at a few line graphs showing price over time for all apples meeting the specifications mentioned above.
 
 ```{r}
-plot(High.Price~Date, xlab = "Date", ylab = "High Terminal Market Price", main = "US Fancy Wholesale apple Pricing", data = data_1)
+plot(AveragePrice ~ Date_1, xlab = "Date", ylab = "High Terminal Market Price", main = "US Fancy Wholesale apple Pricing", data = data_1)
+
 ```
 
